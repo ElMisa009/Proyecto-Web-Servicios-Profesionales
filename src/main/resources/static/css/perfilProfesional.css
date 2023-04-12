@@ -1,0 +1,39 @@
+
+.buttons label:hover a {
+
+    font-size: 30px;
+    color: #fd4;
+    padding: px;
+    transition: all 0.2s ease;
+}
+
+.buttons {
+    min-width: 300px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.buttons a {
+    text-decoration: none;
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    line-height: 30px;
+    text-align: center;
+    background: #314652;
+    color: #f1f1f1;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+    transition: all .4s ease-in-out;
+}
+
+.buttons a:hover {
+    background: rgb(12, 36, 173);
+    transform: scale(1.5);
+}
+
+.popup img {
+    width: unset;
+    cursor: pointer;
+    outline: none;
+}

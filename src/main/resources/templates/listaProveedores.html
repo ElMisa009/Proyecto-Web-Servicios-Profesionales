@@ -1,0 +1,186 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="../css/listaProveedoresCss.css">
+    </head>
+
+    <body>
+
+        <header th:replace="/fragments/header :: header" />
+
+        <div class="container mt-5" style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <!--<li class="breadcrumb-item"><a href="#">Perfil administrador</a></li>-->
+                <li class="breadcrumb-item active" aria-current="page">Proveedores</li>
+            </ol>
+        </div>
+
+        <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+            <div class="row align-items-center g-lg-5 py-5">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <h1 class="display-4 fw-bold lh-1 mb-3">Lista de proveedores</h1>
+                    <p class="col-lg-10 fs-4">Aqui puedes ver una lista detallada de los proveedores o profesionales que desees contratar.</p>
+                </div>
+                <div class="col-md-10 mx-auto col-lg-5">
+
+                </div>
+            </div>
+        </div>
+
+        <main>
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="card-title">Proveedores</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                            <div class="dropdown">
+                                <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ordenar</a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                                        <!--<div class="offcanvas-header">
+                                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filtros</h5>
+                                            <a type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></a>
+                                        </div>-->
+                                        <div class="form-group mt-2">
+                                            <div class="form-group my-3">
+                                                <p>Seleccione la Profesión</p>
+                                                <form method="GET" th:action="@{/proveedor/__${profesion}__}" enctype="multipart/form-data" >
+                                                    <select name="profesion"  >
+                                                        <option></option>
+                                                        <option th:each="proveedoresFiltro : ${proveedoresFiltro}" th:text="${proveedoresFiltro}" 
+                                                                th:value="${proveedoresFiltro}"/>
+                                                    </select>
+                                                    <button type="submit"> Filtrar Busqueda</button>
+                                                </form>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </ul>
+                            </div>
+
+                            <div class="dropdown">
+                                <a th:href="@{/listaProveedoresFiltro}" role="button"  class="btn btn-primary"> FILTRAR</a>
+                                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                                    <div class="offcanvas-header">
+                                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filtros</h5>
+                                        <a type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></a>
+                                    </div>
+
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <form method="POST" th:href="@{/proveedores/filtroBusqueda/__${profesion}__}">
+                                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                </div>
+                                                <div class="offcanvas-body">
+                                                    <div class="form-group my-3">
+                                                        <p></p>
+                                                        <select name="profesion">
+                                                            <option>Seleccione la Profesión</option>
+                                                            <option th:each="proveedoresFiltro : ${proveedoresFiltro}" th:text="${proveedoresFiltro}"></option>
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit">Filtrar Búsqueda</button>
+                                                </div>
+                                                </div>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="">
+                            <div class="table-responsive">
+                                <table class="table project-list-table table-nowrap align-middle table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="ps-4" style="width: 50px;">
+                                                <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck" /><label class="form-check-label" for="contacusercheck"></label></div>
+                                            </th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Profesion</th>
+                                            <th scope="col">Calificacion</th>
+                                            <th scope="col">Presentacion</th>
+                                            <th scope="col" sec:authorize="hasRole('ADMINISTRADOR')">Editar/Eliminar/Ver</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:each="proveedores: ${proveedores}">
+                                        <!-- Borrar textContent de cada etiqueta para ser llenado con la base de datos desde el back -->
+                                        <tr>
+                                            <th scope="row" class="ps-4">
+                                                <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck1" /><label class="form-check-label" for="contacusercheck1"></label></div>
+                                            </th>
+                                            <th scope="row" ><span th:text="${proveedores.id}"></span></th>
+                                            <td scope="row" th:text="${proveedores.nombre}"><img th:src="@{/imagen/proveedor/__${proveedores.id}__}" alt="" class="avatar-sm rounded-circle me-2" /></td>
+                                            <td><span th:text="${proveedores.profesion}" class="badge badge-soft-success mb-0"></span></td>
+                                            <td th:text="${proveedores.calificacion}"></td>
+                                            <td th:text="${proveedores.presentacion}" ></td>
+                                            <td sec:authorize="hasRole('ADMINISTRADOR')" >
+                                                <ul class="list-inline mb-0">
+                                                    <li class="list-inline-item">
+                                                        <!-- Colocar en esta etiqueta th la ruta para modificar el perfil -->
+                                                        <a th:href="@{/proveedor/editar/__${proveedores.id}__}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <!-- Colocar en esta etiqueta th que elimina el perfil -->
+                                                        <a th:href="@{/proveedor/eliminar/__${proveedores.id}__}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item ">
+                                                        <!-- Colocar en esta etiqueta th la ruta hacia el perfil del proveedor -->
+                                                        <a th:href="@{/proveedor/__${proveedores.id}__}" class="text-muted px-2" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class='bx bx-show font-size-18'></i></a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+        <div class="b-example-divider"></div>
+
+        <div class="p-3 text-bg-dark">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+
+                    <span class="nav-link px-2 text-secondary">&copy; 2023 Barrios Privados, Inc</span>
+                </div>
+
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+                </ul>
+            </footer>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+    </body>
+
+</html>
